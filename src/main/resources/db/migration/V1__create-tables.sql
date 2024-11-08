@@ -26,7 +26,7 @@ CREATE TABLE livro (
   editora VARCHAR(100) NOT NULL,
   isbn VARCHAR(20) UNIQUE NOT NULL,
   categoria VARCHAR(100) NOT NULL,
-  disponivel TINYINT NOT NULL DEFAULT 1,
+  disponivel TINYINT NOT NULL,
   PRIMARY KEY (id)
   );
 
