@@ -1,6 +1,7 @@
 package com.portfolio.api_sboot_digital_library.domain.endereco;
 
 import com.google.gson.Gson;
+import com.portfolio.api_sboot_digital_library.infra.exception.ViaCepException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -18,7 +19,7 @@ public class viaCepAPI {
             viaCepEndereco viaCepEndereco = new Gson().fromJson(response.body(), viaCepEndereco.class);
 
             if (viaCepEndereco.erro()) {
-                throw new RuntimeException("Não foi possível encontrar o CEP informado.");
+                throw new ViaCepException("Não foi possível encontrar o CEP informado.");
             }
 
             return new Endereco(viaCepEndereco, numero);
