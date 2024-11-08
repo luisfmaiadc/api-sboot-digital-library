@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "endereco")
 @Entity(name = "Endereco")
 public class Endereco {
@@ -28,4 +30,13 @@ public class Endereco {
     @MapsId
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    public Endereco(viaCepEndereco viaCepEndereco, String numero) {
+        this.cep = viaCepEndereco.cep().replace("-", "");
+        this.logradouro = viaCepEndereco.logradouro();
+        this.numero = numero;
+        this.bairro = viaCepEndereco.bairro();
+        this.cidade = viaCepEndereco.localidade();
+        this.estado = viaCepEndereco.uf();
+    }
 }

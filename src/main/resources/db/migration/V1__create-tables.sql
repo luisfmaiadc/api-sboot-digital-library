@@ -19,14 +19,6 @@ CREATE TABLE endereco (
   FOREIGN KEY (id_usuario) REFERENCES users(id)
   );
 
-CREATE TABLE login (
-  id_usuario INT NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id_usuario),
-  FOREIGN KEY (id_usuario) REFERENCES users(id)
-  );
-
 CREATE TABLE livro (
   id INT NOT NULL AUTO_INCREMENT,
   titulo VARCHAR(150) NOT NULL,
