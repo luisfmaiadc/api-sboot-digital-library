@@ -1,5 +1,6 @@
 package com.portfolio.api_sboot_digital_library.controller;
 
+import com.portfolio.api_sboot_digital_library.domain.endereco.DadosAtualizacaoEndereco;
 import com.portfolio.api_sboot_digital_library.domain.users.DadosAtualizacaoUsuario;
 import com.portfolio.api_sboot_digital_library.domain.users.DadosCadastroUsuario;
 import com.portfolio.api_sboot_digital_library.service.UsuarioService;
@@ -27,5 +28,11 @@ public class UsuarioController {
     @Transactional
     public ResponseEntity atualizarUsuario(@RequestBody @Valid DadosAtualizacaoUsuario dados) {
         return usuarioService.atualizarUsuario(dados);
+    }
+
+    @PutMapping("/endereco")
+    @Transactional
+    public ResponseEntity atualizarEndereco(@RequestBody @Valid DadosAtualizacaoEndereco dados) {
+        return usuarioService.atualizarEndereco(dados);
     }
 }

@@ -1,6 +1,8 @@
 package com.portfolio.api_sboot_digital_library.infra.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +15,11 @@ public class ApiExceptionHandler {
     public ResponseEntity handleInvalidArgument(MethodArgumentNotValidException exception) {
         var error =exception.getFieldErrors();
         return ResponseEntity.badRequest().body(error.stream().map(DadosErro::new).toList());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity handleEntityNotFound() {
+        return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(ViaCepException.class)
