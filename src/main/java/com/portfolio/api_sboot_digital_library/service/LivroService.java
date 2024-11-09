@@ -82,8 +82,13 @@ public class LivroService {
         }
     }
 
-    public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(Categoria categoria) {
-        var list = livroRepository.findByCategoria(categoria).stream().map(DadosLivro::new).toList();
+    public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(String categoria) {
+        String categoriaTratada = verificaCategoria(categoria);
+        var list = livroRepository.findByCategoria(Categoria.valueOf(categoriaTratada)).stream().map(DadosLivro::new).toList();
         return ResponseEntity.ok(list);
+    }
+
+    private String verificaCategoria(String categoria) {
+        return categoria.replace("-", "_").toUpperCase();
     }
 }

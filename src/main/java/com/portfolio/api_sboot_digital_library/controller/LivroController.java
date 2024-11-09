@@ -34,7 +34,7 @@ public class LivroController {
     }
 
     @GetMapping("/{categoria}")
-    public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(@PathVariable Categoria categoria) {
+    public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(@PathVariable String categoria) {
         return service.buscarLivrosPorCategoria(categoria);
     }
 
