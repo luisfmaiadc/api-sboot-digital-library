@@ -6,12 +6,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "emprestimo")
 @Entity(name = "Emprestimo")
 public class Emprestimo {
@@ -29,7 +32,12 @@ public class Emprestimo {
     private Livro livro;
 
     @Column(name = "data_emprestimo")
-    private LocalDate dataEmprestimo;
+    private LocalDateTime dataEmprestimo = LocalDateTime.now();
 
-    private String status;
+    private String status = "ativo";
+
+    public Emprestimo(Usuario usuario, Livro livro) {
+        this.usuario = usuario;
+        this.livro = livro;
+    }
 }

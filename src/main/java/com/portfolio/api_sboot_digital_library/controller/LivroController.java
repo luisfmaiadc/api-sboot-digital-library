@@ -1,8 +1,10 @@
 package com.portfolio.api_sboot_digital_library.controller;
 
 import com.portfolio.api_sboot_digital_library.domain.livro.DadosLivro;
+import com.portfolio.api_sboot_digital_library.domain.users.Usuario;
 import com.portfolio.api_sboot_digital_library.service.LivroService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,5 +28,11 @@ public class LivroController {
     @Transactional
     public ResponseEntity atualizarLivro(@RequestBody DadosLivro dados, @PathVariable Integer id) {
         return service.atualizarLivro(dados, id);
+    }
+
+    @PostMapping("/emprestimo/{idLivro}")
+    @Transactional
+    public ResponseEntity realizarEmprestimo(@RequestBody Integer idUsuario, @PathVariable Integer idLivro, UriComponentsBuilder uriComponentsBuilder) {
+        return service.realizarEmprestimo(idUsuario, idLivro, uriComponentsBuilder);
     }
 }
