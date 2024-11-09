@@ -2,6 +2,7 @@ package com.portfolio.api_sboot_digital_library.service;
 
 import com.portfolio.api_sboot_digital_library.domain.emprestimo.DadosEmprestimo;
 import com.portfolio.api_sboot_digital_library.domain.emprestimo.Emprestimo;
+import com.portfolio.api_sboot_digital_library.domain.livro.Categoria;
 import com.portfolio.api_sboot_digital_library.domain.livro.DadosLivro;
 import com.portfolio.api_sboot_digital_library.domain.livro.Livro;
 import com.portfolio.api_sboot_digital_library.domain.users.Usuario;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Service
 public class LivroService {
@@ -78,5 +80,10 @@ public class LivroService {
         if (!livro.getDisponivel()) {
             throw new UnavailableException("Livro informado já foi emprestado, retorne em alguns dias.");
         }
+    }
+
+    public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(Categoria categoria) {
+        var list = livroRepository.findByCategoria(categoria).stream().map(DadosLivro::new).toList();
+        return ResponseEntity.ok(list);
     }
 }
