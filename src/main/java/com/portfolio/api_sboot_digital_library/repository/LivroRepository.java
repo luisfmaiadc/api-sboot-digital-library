@@ -10,4 +10,7 @@ import java.util.List;
 public interface LivroRepository extends JpaRepository<Livro, Integer> {
 
     List<Livro> findByCategoria(Categoria categoria);
+
+    @Query("SELECT l FROM Livro l WHERE l.disponivel = true")
+    List <Livro> findLivrosDisponveis();
 }

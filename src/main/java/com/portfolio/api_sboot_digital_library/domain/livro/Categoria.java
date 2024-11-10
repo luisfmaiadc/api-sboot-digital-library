@@ -11,5 +11,6 @@ public enum Categoria {
     SUSPENSE,
     TERROR,
     FANTASIA,
+    CIENCIA,
     INFANTIL;
 }

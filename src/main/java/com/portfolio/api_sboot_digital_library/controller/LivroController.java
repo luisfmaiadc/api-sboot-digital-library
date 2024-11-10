@@ -43,4 +43,9 @@ public class LivroController {
     public ResponseEntity realizarEmprestimo(@RequestBody Integer idUsuario, @PathVariable Integer idLivro, UriComponentsBuilder uriComponentsBuilder) {
         return service.realizarEmprestimo(idUsuario, idLivro, uriComponentsBuilder);
     }
+
+    @GetMapping("/emprestimo")
+    public ResponseEntity<List<DadosLivro>> buscarLivrosDisponveis() {
+        return service.buscarLivrosDisponveis();
+    }
 }

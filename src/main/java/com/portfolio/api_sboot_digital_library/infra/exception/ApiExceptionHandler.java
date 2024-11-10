@@ -32,6 +32,11 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
+    @ExceptionHandler(UnavailableException.class)
+    public ResponseEntity handleUnavailable(UnavailableException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
     private record DadosErro(String campo, String mensagem) {
         DadosErro(FieldError fieldError) {
             this(fieldError.getField(), fieldError.getDefaultMessage());

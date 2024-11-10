@@ -84,11 +84,20 @@ public class LivroService {
 
     public ResponseEntity<List<DadosLivro>> buscarLivrosPorCategoria(String categoria) {
         String categoriaTratada = verificaCategoria(categoria);
-        var list = livroRepository.findByCategoria(Categoria.valueOf(categoriaTratada)).stream().map(DadosLivro::new).toList();
-        return ResponseEntity.ok(list);
+        try {
+            var list = livroRepository.findByCategoria(Categoria.valueOf(categoriaTratada)).stream().map(DadosLivro::new).toList();
+            return ResponseEntity.ok(list);
+        } catch (IllegalArgumentException e) {
+            throw new UnavailableException("Categoria inválida.");
+        }
     }
 
     private String verificaCategoria(String categoria) {
         return categoria.replace("-", "_").toUpperCase();
+    }
+
+    public ResponseEntity<List<DadosLivro>> buscarLivrosDisponveis() {
+        var list = livroRepository.findLivrosDisponveis().stream().map(DadosLivro::new).toList();
+        return ResponseEntity.ok(list);
     }
 }
