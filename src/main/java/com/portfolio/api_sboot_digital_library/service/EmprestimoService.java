@@ -1,5 +1,7 @@
 package com.portfolio.api_sboot_digital_library.service;
 
+import com.portfolio.api_sboot_digital_library.domain.emprestimo.Emprestimo;
+import com.portfolio.api_sboot_digital_library.domain.emprestimo.Status;
 import com.portfolio.api_sboot_digital_library.domain.livro.DadosLivro;
 import com.portfolio.api_sboot_digital_library.domain.livro.Livro;
 import com.portfolio.api_sboot_digital_library.domain.users.Usuario;
@@ -28,5 +30,13 @@ public class EmprestimoService {
         Usuario usuario = usuarioRepository.getReferenceById(idUsuario);
         var list = emprestimoRepository.findHistoricoEmprestimo(usuario.getId()).stream().map(DadosLivro::new).toList();
         return ResponseEntity.ok(list);
+    }
+
+    public ResponseEntity finalizarEmprestimo(Integer idEmprestimo) {
+        Emprestimo emprestimo = emprestimoRepository.getReferenceById(idEmprestimo);
+        Livro livro = emprestimo.getLivro();
+        livro.setDisponivel(Boolean.TRUE);
+        emprestimo.setStatus(Status.FINALIZADO);
+        return ResponseEntity.noContent().build();
     }
 }

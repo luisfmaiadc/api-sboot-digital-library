@@ -33,7 +33,8 @@ public class Emprestimo {
     @Column(name = "data_emprestimo")
     private LocalDateTime dataEmprestimo = LocalDateTime.now();
 
-    private String status = "ativo";
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ATIVO;
 
     public Emprestimo(Usuario usuario, Livro livro) {
         this.usuario = usuario;

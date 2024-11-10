@@ -4,6 +4,7 @@ import com.portfolio.api_sboot_digital_library.domain.livro.DadosLivro;
 import com.portfolio.api_sboot_digital_library.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,5 +19,11 @@ public class EmprestimoController {
     @GetMapping("/{idUsuario}/historico")
     public ResponseEntity<List<DadosLivro>> buscaHistoricoEmprestimo(@PathVariable Integer idUsuario) {
         return service.buscaHistoricoEmprestimo(idUsuario);
+    }
+
+    @PutMapping("/{idEmprestimo}")
+    @Transactional
+    public ResponseEntity finalizarEmprestimo(@PathVariable Integer idEmprestimo) {
+        return service.finalizarEmprestimo(idEmprestimo);
     }
 }
