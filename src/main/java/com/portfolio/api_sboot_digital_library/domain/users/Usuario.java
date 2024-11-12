@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "users")
-@Entity(name = "Usuario")
+@Entity
 public class Usuario {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Usuario {
 
     private String telefone;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Endereco endereco;
 
     @OneToMany(mappedBy = "usuario")

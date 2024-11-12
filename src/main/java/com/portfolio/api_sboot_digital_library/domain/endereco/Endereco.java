@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "endereco")
-@Entity(name = "Endereco")
+@Entity
 public class Endereco {
 
     @Id
@@ -26,7 +26,7 @@ public class Endereco {
     private String cidade;
     private String estado;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
